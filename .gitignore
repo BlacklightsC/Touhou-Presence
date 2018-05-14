@@ -3,5 +3,6 @@
 ################################################################################
 
 /.vs
+/Touhou-Presence/bin
 /Touhou-Presence/obj
-/packages/Newtonsoft.Json.11.0.2
+/packages
