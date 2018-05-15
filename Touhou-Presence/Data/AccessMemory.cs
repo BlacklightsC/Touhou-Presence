@@ -42,5 +42,6 @@ namespace Touhou_Presence
         protected bool BringBool(IntPtr Offset) { return BitConverter.ToBoolean(Bring(Offset, 1), 0); }
         protected byte BringByte(IntPtr Offset) { return Bring(Offset, 1)[0]; }
         protected IntPtr Handle = IntPtr.Zero;
+        
     }
 }
