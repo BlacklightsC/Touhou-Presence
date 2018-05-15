@@ -1,5 +1,5 @@
 # Touhou-Presence
-Discord Rich Presence by Touhou Project
+Discord Rich Presence for about Touhou Project
 
 This project will work without dll injection.
 
