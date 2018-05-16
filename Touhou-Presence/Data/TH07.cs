@@ -28,6 +28,7 @@ namespace Touhou_Presence.Data
                     if (Processes.Length == 0) return;
                     Game = Processes[0];
                 }
+                // Need smallImage. it will shown character, or difficulty.
                 Presence.Assets.LargeImageText = SubTitle;
                 if (IsInGame)
                 {
@@ -35,15 +36,10 @@ namespace Touhou_Presence.Data
                     {
                         IsPlaying = true;
                         Presence.Details = StatusString + " " + CharSpellString;
-                        Presence.State = Difficulty + " ~ Chapter " + Chapter;
                         Presence.Timestamps.Start = PlayTime = DateTime.UtcNow;
                         return;
                     }
-                    else
-                    {
-                        Presence.State = Difficulty + " ~ Chapter " + Chapter;
-                    }
-
+                    Presence.State = Difficulty + " ~ Chapter " + Chapter;
                     bool isPause = IsPause;
                     if (!WasPause && isPause)
                     {

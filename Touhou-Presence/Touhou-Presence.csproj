@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Abstract\AccessMemory.cs" />
+    <Compile Include="Data\TH06.cs" />
     <Compile Include="Data\th07.cs" />
     <Compile Include="Abstract\TouhouBase.cs" />
     <Compile Include="Abstract\TouhouBasePresence.cs" />
