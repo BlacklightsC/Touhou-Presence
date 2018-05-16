@@ -48,9 +48,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Data\AccessMemory.cs" />
+    <Compile Include="Abstract\AccessMemory.cs" />
     <Compile Include="Data\TH07.cs" />
-    <Compile Include="Data\TouhouBase.cs" />
+    <Compile Include="Abstract\TouhouBase.cs" />
+    <Compile Include="Abstract\TouhouBasePresence.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
