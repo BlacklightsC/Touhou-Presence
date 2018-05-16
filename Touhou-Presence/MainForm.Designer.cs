@@ -28,20 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.TrayIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.SuspendLayout();
-            // 
-            // TrayIcon
-            // 
-            this.TrayIcon.Text = "Touhou Presence";
-            this.TrayIcon.Visible = true;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(273, 238);
             this.Name = "MainForm";
             this.Text = "Form1";
             this.ResumeLayout(false);
@@ -49,8 +42,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.NotifyIcon TrayIcon;
     }
 }
 

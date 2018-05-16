@@ -1,50 +1,73 @@
 ﻿using System;
+using System.Diagnostics;
 
 namespace Touhou_Presence
 {
-    public abstract class TouhouBase : public AccessMemory, public TouhouBasePresence
+    public abstract class TouhouBase : TouhouBasePresence
     {
-        protected IntPtr MainOffset = new IntPtr(0x400000);
-
+        protected override void Init()
+        {
+            //ProcessTimer.Elapsed += (sender, e) =>
+            //{
+            //    Process[] processes = Process.GetProcesses();
+            //    foreach (var item in processes)
+            //    {
+            //        if (item.ProcessName.IndexOf("th") == 0)
+            //        {
+            //            var type = Type.GetType("Touhou_Presence.Data." + item.ProcessName);
+            //            var instance = Activator.CreateInstance(type);
+            //            return;
+            //        }
+            //    }
+            //};
+            base.Init();
+        }
+        
         public string ProgramName { get; protected set; }
+        public string SubTitle { get; protected set; }
 
         protected int DifficultyOffset = 0;
         public virtual string Difficulty {
             get {
-                switch (BringByte(MainOffset + DifficultyOffset))
+                switch (BringByte(Game.MainModule.BaseAddress + DifficultyOffset))
                 {
                     case 0: return "Easy";
                     case 1: return "Normal";
                     case 2: return "Hard";
                     case 3: return "Lunatic";
-                    default: return "Extra";
+                    default:return "Extra";
                 }
             }
         }
 
         protected int ChapterOffset = 0;
-        public virtual int Chapter { get => BringByte(MainOffset + ChapterOffset); }
+        public virtual int Chapter { get => BringByte(Game.MainModule.BaseAddress + ChapterOffset); }
 
         protected int CharacterOffset = 0;
-        public int Character { get => BringByte(MainOffset + CharacterOffset); }
+        public int Character { get => BringByte(Game.MainModule.BaseAddress + CharacterOffset); }
         public virtual string CharacterString { get; }
 
         protected int SpellOffset = 0;
-        public int Spell { get => BringByte(MainOffset + SpellOffset); }
+        public int Spell { get => BringByte(Game.MainModule.BaseAddress + SpellOffset); }
         public virtual string SpellString { get; }
 
         protected int CharSpellOffset = 0;
-        public int CharSpell { get => BringByte(MainOffset + CharSpellOffset); }
+        public int CharSpell { get => BringByte(Game.MainModule.BaseAddress + CharSpellOffset); }
         public virtual string CharSpellString { get; }
 
         protected int IsPauseOffset = 0;
-        public bool IsPause { get => BringBool(MainOffset + IsPauseOffset); }
+        public bool IsPause { get => BringBool(Game.MainModule.BaseAddress + IsPauseOffset); }
 
         protected int IsInGameOffset = 0;
-        public bool IsInGame { get => BringBool(MainOffset + IsInGameOffset); }
+        public bool IsInGame { get => BringBool(Game.MainModule.BaseAddress + IsInGameOffset); }
         
         protected int StatusOffset = 0;
-        public int Status { get => BringByte(MainOffset + StatusOffset); }
+        public int Status { get => BringByte(Game.MainModule.BaseAddress + StatusOffset); }
         public virtual string StatusString { get; }
+
+        protected bool IsPlaying = false;
+        protected bool WasPause = false;
+        protected DateTime? PlayTime;
+        protected string LastStatus = null;
     }
 }

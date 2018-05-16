@@ -49,7 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Abstract\AccessMemory.cs" />
-    <Compile Include="Data\TH07.cs" />
+    <Compile Include="Data\th07.cs" />
     <Compile Include="Abstract\TouhouBase.cs" />
     <Compile Include="Abstract\TouhouBasePresence.cs" />
     <Compile Include="MainForm.cs">

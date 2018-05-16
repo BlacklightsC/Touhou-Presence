@@ -1,4 +1,6 @@
 using System;
+using System.Timers;
+using System.Diagnostics;
 using System.Runtime.InteropServices;
 
 namespace Touhou_Presence
@@ -32,16 +34,17 @@ namespace Touhou_Presence
         protected byte[] Bring(IntPtr Offset, uint size)
         {
             byte[] lpBuffer = new byte[size];
-            VirtualProtectEx(Handle, Offset, size, 0x40, out uint lpflOldProtect);
-            ReadProcessMemory(Handle, Offset, lpBuffer, size, out uint lpNumberOfBytes);
-            VirtualProtectEx(Handle, Offset, size, lpflOldProtect, out uint Null);
+            VirtualProtectEx(Game.Handle, Offset, size, 0x40, out uint lpflOldProtect);
+            ReadProcessMemory(Game.Handle, Offset, lpBuffer, size, out uint lpNumberOfBytes);
+            VirtualProtectEx(Game.Handle, Offset, size, lpflOldProtect, out uint Null);
             return lpBuffer;
         }
 
         protected int BringInt(IntPtr Offset) { return BitConverter.ToInt32(Bring(Offset, 4), 0); }
         protected bool BringBool(IntPtr Offset) { return BitConverter.ToBoolean(Bring(Offset, 1), 0); }
         protected byte BringByte(IntPtr Offset) { return Bring(Offset, 1)[0]; }
-        protected IntPtr Handle = IntPtr.Zero;
-        
+        protected Process Game;
+        protected Timer ProcessTimer = new Timer(5000);
+        protected Timer WorkerTimer = new Timer(3000);
     }
 }

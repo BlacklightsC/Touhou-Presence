@@ -3,23 +3,30 @@ using DiscordRPC;
 
 namespace Touhou_Presence
 {
-    public abstract class TouhouBasePresence : IDisposable
+    public abstract class TouhouBasePresence : AccessMemory, IDisposable
     {
-        protected DiscordRpcClient client;
-        protected RichPresence presence;
+        private DiscordRpcClient client;
+        protected RichPresence Presence;
         protected string ClientID;
 
-        protected void Init()
+        protected virtual void Init()
         {
             client = new DiscordRpcClient(ClientID, false, -1);
-            presence = new RichPresence()
+            Presence = new RichPresence()
             {
-                Assets = new Assets() { LargeImageKey = "Cover" },
+                Assets = new Assets() { LargeImageKey = "cover" },
                 Party = new Party(),
                 Timestamps = new Timestamps()
+                {
+                    End = null
+                }
             };
             client.Initialize();
-            client.SetPresence(presence);
+        }
+
+        protected void UpdatePresence()
+        {
+            client.SetPresence(Presence);
         }
 
         #region [    IDisposable Implemention    ]
@@ -34,8 +41,17 @@ namespace Touhou_Presence
             if (!disposed)
             {
                 if (disposing)
+                {
                     if (client != null)
                         client.Dispose();
+                    if (Game != null)
+                        Game.Dispose();
+                    if (ProcessTimer != null)
+                        ProcessTimer.Dispose();
+                    if (WorkerTimer != null)
+                        WorkerTimer.Dispose();
+                }
+
                 disposed = true;
             }
         }

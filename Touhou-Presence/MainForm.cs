@@ -12,6 +12,7 @@ namespace Touhou_Presence
 {
     public partial class MainForm : Form
     {
+        Data.th07 data = new Data.th07();
         public MainForm()
         {
             InitializeComponent();
