@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Touhou_Presence.Data
+namespace Touhou_Presence
 {
     public abstract class TouhouBase : public AccessMemory, public TouhouBasePresence
     {
