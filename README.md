@@ -1,4 +1,6 @@
 # Touhou-Presence
+[![Build status](https://ci.appveyor.com/api/projects/status/mlvmknialmsxtyka/branch/master?svg=true)](https://ci.appveyor.com/project/BlacklightsC/touhou-presence/branch/master)
+
 Discord Rich Presence for about Touhou Project
 
 This project will work without dll injection.
