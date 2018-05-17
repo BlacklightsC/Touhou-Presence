@@ -9,8 +9,15 @@ This project using these open-source project.
 - Discord RPC (https://github.com/Lachee/discord-rpc-csharp) MIT
 - Newtonsoft.Json (https://github.com/JamesNK/Newtonsoft.Json) MIT
 
+**How to use?**
+1. Start this program.
+2. ~~???~~
+3. ~~PROFIT!!!~~
 
-Touhou series Support status
+Program will detect your Touhou Project window for automatically.
+
+
+Currently Touhou series Support status
 
 - ❌ All Non-windows version Touhou
 - 🔴 Touhou 6: 東方紅魔郷　～ the Embodiment of Scarlet Devil
