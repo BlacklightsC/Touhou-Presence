@@ -45,7 +45,10 @@ namespace Touhou_Presence
                 if (disposing)
                 {
                     if (client != null)
+                    {
+                        client.ClearPresence();
                         client.Dispose();
+                    }
                     if (Game != null)
                         Game.Dispose();
                     if (WorkerTimer != null)

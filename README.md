@@ -22,7 +22,7 @@ Program will detect your Touhou Project window for automatically.
 Currently Touhou series Support status
 
 - ❌ All Non-windows version Touhou
-- 🔴 Touhou 6: 東方紅魔郷　～ the Embodiment of Scarlet Devil
+- 🔵 Touhou 6: 東方紅魔郷　～ the Embodiment of Scarlet Devil
 - 🔵 Touhou 7: 東方妖々夢　～ Perfect Cherry Blossom
 - 🔴 Touhou 7.5: 東方萃夢想　～ Immaterial and Missing Power
 - 🔴 Touhou 8: 東方永夜抄　～ Imperishable Night

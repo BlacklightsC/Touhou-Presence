@@ -34,19 +34,28 @@ namespace Touhou_Presence
             ProcessTimer.Elapsed += (sender, e) =>
             {
                 if (Instance != null) return;
-                foreach (var item in Process.GetProcesses())
+                foreach (Process proc in Process.GetProcesses())
                 {
                     if (Instance is null
-                     && item.ProcessName.IndexOf("th") == 0)
+                     && proc.ProcessName.IndexOf("th") == 0)
                     {
-                        Type type = Type.GetType(string.Format("Touhou_Presence.Data.{0}",item.ProcessName));
+                        Type type = Type.GetType(string.Format("Touhou_Presence.Data.{0}",proc.ProcessName));
                         if (type is null)
                         {
-                            item.Dispose();
+                            proc.Dispose();
                         }
                         else
                         {
-                            Instance = (TouhouBase)Activator.CreateInstance(type, item);
+                            bool IsIncomplete = false;
+                            foreach (Attribute attr in Attribute.GetCustomAttributes(type))
+                            {
+                                if (attr is Incomplete)
+                                {
+                                    IsIncomplete = true;
+                                }
+                            }
+                            if (IsIncomplete) continue;
+                            Instance = (TouhouBase)Activator.CreateInstance(type, proc);
                             SetText(type.Name.ToUpper() + ": " + Instance.SubTitle);
                             ProcessOpen();
                         }
@@ -54,7 +63,7 @@ namespace Touhou_Presence
                     }
                     else
                     {
-                        item.Dispose();
+                        proc.Dispose();
                     }
                 }
             };

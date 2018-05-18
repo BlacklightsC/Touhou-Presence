@@ -1,5 +1,4 @@
-﻿using System;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 
 namespace Touhou_Presence.Data
 {
@@ -11,7 +10,7 @@ namespace Touhou_Presence.Data
             ClientID = "445995245767884800";
             SubTitle = "Perfect Cherry Blossom";
             ProgramName = "th07";
-            ChapterOffset = 0x22F85C;
+            StageOffset = 0x22F85C;
             CharacterOffset = 0x22F645;
             SpellOffset = 0x22F646;
             DifficultyOffset = 0x226280;
@@ -21,50 +20,8 @@ namespace Touhou_Presence.Data
             IsInGameOffset = 0x22FBDC;
             Init();
 
-            WorkerTimer.Elapsed += (sender, e) =>
-            {
-                // Need smallImage. it will shown character, or difficulty.
-                Presence.Assets.LargeImageText = SubTitle;
-                if (Game.HasExited)
-                {
-                    WorkerTimer.Enabled = false;
-                    ProcessFinder.ProcessClose();
-                    return;
-                }
-                if (IsInGame)
-                {
-                    if (!IsPlaying)
-                    {
-                        IsPlaying = true;
-                        Presence.Details = StatusString + " " + CharSpellString;
-                        Presence.Timestamps.Start = PlayTime = DateTime.UtcNow;
-                        return;
-                    }
-                    Presence.State = Difficulty + " ~ Chapter " + Chapter;
-                    bool isPause = IsPause;
-                    if (!WasPause && isPause)
-                    {
-                        WasPause = true;
-                        Presence.Details = "Pausing " + CharSpellString;
-                        Presence.Timestamps.Start = DateTime.UtcNow;
-                    }
-                    else if (WasPause && !isPause)
-                    {
-                        WasPause = false;
-                        Presence.Details = StatusString + " " + CharSpellString;
-                        Presence.Timestamps.Start = (PlayTime += DateTime.UtcNow - Presence.Timestamps.Start);
-                    }
-                }
-                else
-                {
-                    IsPlaying = false;
-                    Presence.Details = "In Main Menu";
-                    Presence.Timestamps.Start = PlayTime = null;
-                    Presence.State = null;
-                }
-                UpdatePresence();
-            };
-        WorkerTimer.Enabled = true;
+            WorkerTimer.Elapsed += ElapsedFunc;
+            WorkerTimer.Enabled = true;
         }
 
         public override string CharacterString {
