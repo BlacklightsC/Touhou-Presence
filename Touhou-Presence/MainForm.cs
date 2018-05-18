@@ -12,10 +12,21 @@ namespace Touhou_Presence
 {
     public partial class MainForm : Form
     {
-        Data.th07 data = new Data.th07();
         public MainForm()
         {
             InitializeComponent();
+            this.Icon = TrayIcon.Icon = Properties.Resources.Icon;
+            ProcessFinder.SetText = text => this.Invoke(new Action(() => CMT_CurrentGame.Text = text));
+            Shown += (sender, e) =>
+            {
+                this.Hide();
+                ProcessFinder.SearchProcess();
+            };
+        }
+
+        private void CMB_Close_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

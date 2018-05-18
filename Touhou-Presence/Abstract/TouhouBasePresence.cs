@@ -1,4 +1,5 @@
 using System;
+using System.Timers;
 using DiscordRPC;
 
 namespace Touhou_Presence
@@ -8,6 +9,7 @@ namespace Touhou_Presence
         private DiscordRpcClient client;
         protected RichPresence Presence;
         protected string ClientID;
+        protected Timer WorkerTimer = new Timer(3000);
 
         protected virtual void Init()
         {
@@ -46,8 +48,6 @@ namespace Touhou_Presence
                         client.Dispose();
                     if (Game != null)
                         Game.Dispose();
-                    if (ProcessTimer != null)
-                        ProcessTimer.Dispose();
                     if (WorkerTimer != null)
                         WorkerTimer.Dispose();
                 }

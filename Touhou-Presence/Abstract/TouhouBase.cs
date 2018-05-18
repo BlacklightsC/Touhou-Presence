@@ -1,25 +1,12 @@
 ﻿using System;
-using System.Diagnostics;
 
 namespace Touhou_Presence
 {
     public abstract class TouhouBase : TouhouBasePresence
     {
+
         protected override void Init()
         {
-            //ProcessTimer.Elapsed += (sender, e) =>
-            //{
-            //    Process[] processes = Process.GetProcesses();
-            //    foreach (var item in processes)
-            //    {
-            //        if (item.ProcessName.IndexOf("th") == 0)
-            //        {
-            //            var type = Type.GetType("Touhou_Presence.Data." + item.ProcessName);
-            //            var instance = Activator.CreateInstance(type);
-            //            return;
-            //        }
-            //    }
-            //};
             base.Init();
         }
         

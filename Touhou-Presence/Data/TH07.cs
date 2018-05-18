@@ -3,10 +3,11 @@ using System.Diagnostics;
 
 namespace Touhou_Presence.Data
 {
-    internal class th07 : TouhouBase
+    public class th07 : TouhouBase
     {
-        internal th07()
+        public th07(Process Game)
         {
+            this.Game = Game;
             ClientID = "445995245767884800";
             SubTitle = "Perfect Cherry Blossom";
             ProgramName = "th07";
@@ -22,14 +23,14 @@ namespace Touhou_Presence.Data
 
             WorkerTimer.Elapsed += (sender, e) =>
             {
-                if (Game is null || Game.HasExited)
-                {
-                    Process[] Processes = Process.GetProcessesByName(ProgramName);
-                    if (Processes.Length == 0) return;
-                    Game = Processes[0];
-                }
                 // Need smallImage. it will shown character, or difficulty.
                 Presence.Assets.LargeImageText = SubTitle;
+                if (Game.HasExited)
+                {
+                    WorkerTimer.Enabled = false;
+                    ProcessFinder.ProcessClose();
+                    return;
+                }
                 if (IsInGame)
                 {
                     if (!IsPlaying)
@@ -101,6 +102,7 @@ namespace Touhou_Presence.Data
                     case 4: return "Playing";
                     case 5: return "Practicing";
                     case 12: return "Watching Replay";
+                    case 14: return "Demonstration";
                 }
                 return string.Empty;
             }
