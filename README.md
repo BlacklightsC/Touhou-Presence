@@ -1,14 +1,25 @@
 # Touhou-Presence
+[![Build status](https://ci.appveyor.com/api/projects/status/mlvmknialmsxtyka/branch/master?svg=true)](https://ci.appveyor.com/project/BlacklightsC/touhou-presence/branch/master)
+
 Discord Rich Presence for about Touhou Project
 
 This project will work without dll injection.
+
+**Using IDE: Visual Studio 2017**
 
 This project using these open-source project.
 - Discord RPC (https://github.com/Lachee/discord-rpc-csharp) MIT
 - Newtonsoft.Json (https://github.com/JamesNK/Newtonsoft.Json) MIT
 
+**How to use?**
+1. Start this program.
+2. ~~???~~
+3. ~~PROFIT!!!~~
 
-Touhou series Support status
+Program will detect your Touhou Project window for automatically.
+
+
+Currently Touhou series Support status
 
 - ❌ All Non-windows version Touhou
 - 🔴 Touhou 6: 東方紅魔郷　～ the Embodiment of Scarlet Devil
