@@ -16,12 +16,55 @@ namespace Touhou_Presence.Data
             CharacterOffset = 0x29D4BD;
             SpellOffset = 0x29D4BE;
             DifficultyOffset = 0x29BCB0;
-            IsPauseOffset = 0x29D4BF;  
+            IsPauseOffset = 0x29D4BF;
             StatusOffset = 0x29D4C1;
             IsInGameOffset = 0x29D4C1;
             Init();
 
-            WorkerTimer.Elapsed += ElapsedFunc;
+            WorkerTimer.Elapsed += (sender, e) =>
+            {
+                // Need smallImage. it will shown character, or difficulty.
+                Presence.Assets.LargeImageText = SubTitle;
+                if (Game.HasExited)
+                {
+                    WorkerTimer.Enabled = false;
+                    ProcessFinder.ProcessClose();
+                    return;
+                }
+                bool isPause = IsPause;
+                if (IsInGame || isPause)
+                {
+                    if (!IsPlaying)
+                    {
+                        IsPlaying = true;
+                        Presence.Details = StatusString + " " + CharSpellString;
+                        Presence.Timestamps.Start = PlayTime = DateTime.UtcNow;
+                        return;
+                    }
+                    Presence.State = DiffChap;
+                     
+                    if (!WasPause && isPause)
+                    {
+                        WasPause = true;
+                        Presence.Details = "Pausing " + CharSpellString;
+                        Presence.Timestamps.Start = DateTime.UtcNow;
+                    }
+                    else if (WasPause && !isPause)
+                    {
+                        WasPause = false;
+                        Presence.Details = StatusString + " " + CharSpellString;
+                        Presence.Timestamps.Start = (PlayTime += DateTime.UtcNow - Presence.Timestamps.Start);
+                    }
+                }
+                else
+                {
+                    IsPlaying = false;
+                    Presence.Details = "In Main Menu";
+                    Presence.Timestamps.Start = PlayTime = null;
+                    Presence.State = null;
+                }
+                UpdatePresence();
+            };
             WorkerTimer.Enabled = true;
         }
 
