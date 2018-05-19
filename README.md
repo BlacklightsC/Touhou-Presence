@@ -45,3 +45,5 @@ Currently Touhou series Support status
 - 🔴 Touhou 16: 東方天空璋　～ Hidden Star in Four Seasons
 
 Some unpopular series will support later.
+
+Popularity rank can see in [here](https://en.touhouwiki.net/wiki/THWiki_Popularity_Poll)
