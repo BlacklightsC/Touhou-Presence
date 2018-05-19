@@ -43,3 +43,7 @@ Currently Touhou series Support status
 - 🔴 Touhou 15: 東方紺珠伝　～ Legacy of Lunatic Kingdom
 - 🔴 Touhou 15.5: 東方憑依華　～ Antinomy of Common Flowers
 - 🔴 Touhou 16: 東方天空璋　～ Hidden Star in Four Seasons
+
+Some unpopular series will support later.
+
+Popularity rank can see in [here](https://en.touhouwiki.net/wiki/THWiki_Popularity_Poll)
