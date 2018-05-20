@@ -12,15 +12,15 @@ namespace Touhou_Presence
         protected override void Init()
         {
             base.Init();
+            // Need smallImage. it will shown character, or difficulty.
+            Presence.Assets.LargeImageText = SubTitle;
         }
 
         protected virtual void ElapsedFunc(object sender, EventArgs e)
         {
-            // Need smallImage. it will shown character, or difficulty.
-            Presence.Assets.LargeImageText = SubTitle;
             if (Game.HasExited)
             {
-                WorkerTimer.Enabled = false;
+                WorkerTimer.Stop();
                 ProcessFinder.ProcessClose();
                 return;
             }
@@ -70,7 +70,7 @@ namespace Touhou_Presence
                     case 1: return "Normal";
                     case 2: return "Hard";
                     case 3: return "Lunatic";
-                    case 4: return "Extra Stage";
+                    case 4: return "⚠️ Extra ⚠️";
                     default: return "Unknown";
                 }
             }
@@ -82,7 +82,7 @@ namespace Touhou_Presence
         public virtual string DiffChap {
             get {
                 string difficulty = Difficulty;
-                if (difficulty == "Extra Stage")
+                if (difficulty == "⚠️ Extra ⚠️")
                 {
                     return difficulty;
                 }
@@ -101,8 +101,6 @@ namespace Touhou_Presence
         public virtual int Spell { get => BringByte(Game.MainModule.BaseAddress + SpellOffset); }
         public virtual string SpellString { get; }
 
-        protected int CharSpellOffset = 0;
-        public virtual int CharSpell { get => BringByte(Game.MainModule.BaseAddress + CharSpellOffset); }
         public virtual string CharSpellString { get => CharacterString + " " + SpellString; }
 
         protected int IsPauseOffset = 0;

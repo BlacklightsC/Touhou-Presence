@@ -49,7 +49,11 @@ namespace Touhou_Presence
                                     IsIncomplete = true;
                                 }
                             }
-                            if (IsIncomplete) continue;
+                            if (IsIncomplete)
+                            {
+                                proc.Dispose();
+                                continue;
+                            }
                             Instance = (TouhouBase)Activator.CreateInstance(type, proc);
                             SetText(type.Name.ToUpper() + ": " + Instance.SubTitle);
                             ProcessOpen();

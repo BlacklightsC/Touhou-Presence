@@ -7,6 +7,8 @@ namespace Touhou_Presence
 {
     public abstract class AccessMemory
     {
+        protected Process Game;
+
         #region [    Windows API    ]
         [DllImport("kernel32", SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
@@ -43,6 +45,5 @@ namespace Touhou_Presence
         protected int BringInt(IntPtr Offset) { return BitConverter.ToInt32(Bring(Offset, 4), 0); }
         protected bool BringBool(IntPtr Offset) { return BringByte(Offset) > 0; }
         protected byte BringByte(IntPtr Offset) { return Bring(Offset, 1)[0]; }
-        protected Process Game;
     }
 }

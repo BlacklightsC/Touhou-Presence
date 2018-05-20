@@ -23,11 +23,9 @@ namespace Touhou_Presence.Data
 
             WorkerTimer.Elapsed += (sender, e) =>
             {
-                // Need smallImage. it will shown character, or difficulty.
-                Presence.Assets.LargeImageText = SubTitle;
                 if (Game.HasExited)
                 {
-                    WorkerTimer.Enabled = false;
+                    WorkerTimer.Stop();
                     ProcessFinder.ProcessClose();
                     return;
                 }
@@ -65,7 +63,7 @@ namespace Touhou_Presence.Data
                 }
                 UpdatePresence();
             };
-            WorkerTimer.Enabled = true;
+            WorkerTimer.Start();
         }
 
         public override string CharacterString {

@@ -76,7 +76,7 @@
     <Compile Include="Abstract\TouhouBase.cs" />
     <Compile Include="Abstract\TouhouBasePresence.cs" />
     <Compile Include="Data\th08.cs" />
-    <Compile Include="ProcessFinder.cs" />
+    <Compile Include="Class\ProcessFinder.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>

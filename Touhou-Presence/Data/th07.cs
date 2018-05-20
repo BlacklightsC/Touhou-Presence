@@ -15,13 +15,12 @@ namespace Touhou_Presence.Data
             SpellOffset = 0x22F646;
             DifficultyOffset = 0x226280;
             IsPauseOffset = 0x22F640;
-            CharSpellOffset = 0x22F647;
             StatusOffset = 0x22F648;
             IsInGameOffset = 0x22FBDC;
             Init();
 
             WorkerTimer.Elapsed += ElapsedFunc;
-            WorkerTimer.Enabled = true;
+            WorkerTimer.Start();
         }
 
         public override string CharacterString {
