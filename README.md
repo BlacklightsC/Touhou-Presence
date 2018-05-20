@@ -25,7 +25,7 @@ Currently Touhou series Support status
 - 🔵 Touhou 6: 東方紅魔郷　～ the Embodiment of Scarlet Devil
 - 🔵 Touhou 7: 東方妖々夢　～ Perfect Cherry Blossom
 - 🔴 Touhou 7.5: 東方萃夢想　～ Immaterial and Missing Power
-- 🔴 Touhou 8: 東方永夜抄　～ Imperishable Night
+- 🔵 Touhou 8: 東方永夜抄　～ Imperishable Night
 - 🔴 Touhou 9: 東方花映塚　～ Phantasmagoria of Flower View
 - 🔴 Touhou 9.5: 東方文花帖　～ Shoot the Bullet
 - 🔴 Touhou 10: 東方風神録　～ Mountain of Faith
