@@ -32,8 +32,8 @@
             this.TrayIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.TrayIconMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.CMB_CurrentGame = new System.Windows.Forms.ToolStripMenuItem();
-            this.CMB_Close = new System.Windows.Forms.ToolStripMenuItem();
             this.CMT_CurrentGame = new System.Windows.Forms.ToolStripTextBox();
+            this.CMB_Close = new System.Windows.Forms.ToolStripMenuItem();
             this.TrayIconMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -60,16 +60,8 @@
             this.CMB_CurrentGame.Font = new System.Drawing.Font("Arial", 10F);
             this.CMB_CurrentGame.Name = "CMB_CurrentGame";
             this.CMB_CurrentGame.ShowShortcutKeys = false;
-            this.CMB_CurrentGame.Size = new System.Drawing.Size(295, 22);
+            this.CMB_CurrentGame.Size = new System.Drawing.Size(315, 22);
             this.CMB_CurrentGame.Text = "Current Game";
-            // 
-            // CMB_Close
-            // 
-            this.CMB_Close.Font = new System.Drawing.Font("Arial", 10F);
-            this.CMB_Close.Name = "CMB_Close";
-            this.CMB_Close.Size = new System.Drawing.Size(295, 22);
-            this.CMB_Close.Text = "Close";
-            this.CMB_Close.Click += new System.EventHandler(this.CMB_Close_Click);
             // 
             // CMT_CurrentGame
             // 
@@ -78,6 +70,14 @@
             this.CMT_CurrentGame.ReadOnly = true;
             this.CMT_CurrentGame.Size = new System.Drawing.Size(280, 21);
             this.CMT_CurrentGame.Text = "Nothing found";
+            // 
+            // CMB_Close
+            // 
+            this.CMB_Close.Font = new System.Drawing.Font("Arial", 10F);
+            this.CMB_Close.Name = "CMB_Close";
+            this.CMB_Close.Size = new System.Drawing.Size(315, 22);
+            this.CMB_Close.Text = "Close";
+            this.CMB_Close.Click += new System.EventHandler(this.CMB_Close_Click);
             // 
             // MainForm
             // 
