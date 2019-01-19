@@ -16,12 +16,9 @@ namespace Touhou_Presence
             client = new DiscordRpcClient(ClientID, false, -1);
             Presence = new RichPresence()
             {
-                Assets = new Assets() { LargeImageKey = "cover" },
+                Assets = new Assets { LargeImageKey = "cover" },
                 Party = new Party(),
-                Timestamps = new Timestamps()
-                {
-                    End = null
-                }
+                Timestamps = new Timestamps { End = null }
             };
             client.Initialize();
         }
@@ -42,20 +39,34 @@ namespace Touhou_Presence
         {
             if (!disposed)
             {
+                disposed = true;
                 if (disposing)
                 {
+                    if (WorkerTimer != null)
+                    {
+                        using (WorkerTimer)
+                        {
+                            WorkerTimer.Stop();
+                            WorkerTimer.Close();
+                        }
+                    }
                     if (client != null)
                     {
-                        client.ClearPresence();
-                        client.Dispose();
+                        using (client)
+                        {
+                            try
+                            {
+                                client.ClearPresence();
+                            }
+                            catch (NullReferenceException)
+                            {
+
+                            }
+                        }
                     }
                     if (Game != null)
                         Game.Dispose();
-                    if (WorkerTimer != null)
-                        WorkerTimer.Dispose();
                 }
-
-                disposed = true;
             }
         }
         ~TouhouBasePresence()

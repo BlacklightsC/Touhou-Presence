@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 
 namespace Touhou_Presence
 {
@@ -12,50 +13,56 @@ namespace Touhou_Presence
         protected override void Init()
         {
             base.Init();
+            Game.Exited += (sender, e) =>
+            {
+                WorkerTimer.Stop();
+                ProcessFinder.ProcessClose();
+            };
             // Need smallImage. it will shown character, or difficulty.
             Presence.Assets.LargeImageText = SubTitle;
         }
 
         protected virtual void ElapsedFunc(object sender, EventArgs e)
         {
-            if (Game.HasExited)
+            try
             {
-                WorkerTimer.Stop();
+                if (IsInGame)
+                {
+                    if (!IsPlaying)
+                    {
+                        IsPlaying = true;
+                        Presence.Details = StatusString + " " + CharSpellString;
+                        Presence.Timestamps.Start = PlayTime = DateTime.UtcNow;
+                        return;
+                    }
+                    Presence.State = DiffChap;
+                    bool isPause = IsPause;
+                    if (!WasPause && isPause)
+                    {
+                        WasPause = true;
+                        Presence.Details = "Pausing " + CharSpellString;
+                        Presence.Timestamps.Start = DateTime.UtcNow;
+                    }
+                    else if (WasPause && !isPause)
+                    {
+                        WasPause = false;
+                        Presence.Details = StatusString + " " + CharSpellString;
+                        Presence.Timestamps.Start = (PlayTime += DateTime.UtcNow - Presence.Timestamps.Start);
+                    }
+                }
+                else
+                {
+                    IsPlaying = false;
+                    Presence.Details = "In Main Menu";
+                    Presence.Timestamps.Start = PlayTime = null;
+                    Presence.State = null;
+                }
+                UpdatePresence();
+            }
+            catch (Win32Exception)
+            {
                 ProcessFinder.ProcessClose();
-                return;
             }
-            if (IsInGame)
-            {
-                if (!IsPlaying)
-                {
-                    IsPlaying = true;
-                    Presence.Details = StatusString + " " + CharSpellString;
-                    Presence.Timestamps.Start = PlayTime = DateTime.UtcNow;
-                    return;
-                }
-                Presence.State = DiffChap;
-                bool isPause = IsPause;
-                if (!WasPause && isPause)
-                {
-                    WasPause = true;
-                    Presence.Details = "Pausing " + CharSpellString;
-                    Presence.Timestamps.Start = DateTime.UtcNow;
-                }
-                else if (WasPause && !isPause)
-                {
-                    WasPause = false;
-                    Presence.Details = StatusString + " " + CharSpellString;
-                    Presence.Timestamps.Start = (PlayTime += DateTime.UtcNow - Presence.Timestamps.Start);
-                }
-            }
-            else
-            {
-                IsPlaying = false;
-                Presence.Details = "In Main Menu";
-                Presence.Timestamps.Start = PlayTime = null;
-                Presence.State = null;
-            }
-            UpdatePresence();
         }
 
         public string ProgramName { get; protected set; }

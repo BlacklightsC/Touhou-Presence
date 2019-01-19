@@ -34,7 +34,7 @@ namespace Touhou_Presence
                     if (Instance is null
                      && proc.ProcessName.IndexOf("th") == 0)
                     {
-                        Type type = Type.GetType(string.Format("Touhou_Presence.Data.{0}",proc.ProcessName));
+                        Type type = Type.GetType($"Touhou_Presence.Data.{proc.ProcessName}");
                         if (type is null)
                         {
                             proc.Dispose();
